@@ -1,7 +1,10 @@
-WITH source AS (
+WITH sf_leads AS (
     SELECT
-    ID,
-    REGEXP_REPLACE(PHONE, '[^0-9]', '') AS phone,
+    CASE 
+            WHEN REGEXP_REPLACE(phone, '[^0-9]', '') LIKE '1%' 
+            THEN SUBSTRING(REGEXP_REPLACE(phone, '[^0-9]', ''), 2) 
+            ELSE REGEXP_REPLACE(phone, '[^0-9]', '') 
+        END AS phone,
     IS_DELETED,
     LOWER(TRIM(LAST_NAME)) AS last_name,
     LOWER(TRIM(FIRST_NAME)) AS first_name,
@@ -12,7 +15,11 @@ WITH source AS (
     STATE,
     POSTAL_CODE,
     COUNTRY,
-    REGEXP_REPLACE(MOBILE_PHONE, '[^0-9]', '') AS mobile_phone,
+    CASE 
+            WHEN REGEXP_REPLACE(mobile_phone, '[^0-9]', '') LIKE '1%' 
+            THEN SUBSTRING(REGEXP_REPLACE(mobile_phone, '[^0-9]', ''), 2) 
+            ELSE REGEXP_REPLACE(mobile_phone, '[^0-9]', '') 
+        END AS mobile_phone,
     LOWER(EMAIL) AS email,
     LOWER(WEBSITE) AS website,
     LOWER(LEAD_SOURCE) AS lead_source,
@@ -31,4 +38,5 @@ WITH source AS (
     FROM {{ source('raw', 'sf_leads') }}
 )
 
-SELECT * FROM source
+select *
+from sf_leads

@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: fct_leads
+    description: "Fact table consolidating all lead data from various sources, with deduplication and Salesforce integration."
+    columns:
+      - name: phone
+        description: "Final standardized phone number."
+        tests:
+          - not_null 
+
+      - name: salesforce_status
+        description: "Flag indicating if lead exists in Salesforce."
+        tests:
+          - accepted_values:
+              values: ['exists_in_salesforce', 'not_in_salesforce'] 

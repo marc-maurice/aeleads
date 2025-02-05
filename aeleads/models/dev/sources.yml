@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw source tables from Salesforce and external data sources."
+    database: AIRBNB
+    schema: RAW
+
+    tables:
+      - name: sf_leads
+        description: "Salesforce leads extracted from the CRM."
+
+      - name: source1
+        description: "External data source 1 containing additional leads information."
+
+      - name: source2
+        description: "External data source 2 containing additional leads information."
+
+      - name: source3
+        description: "External data source 3 containing additional leads information."
+
+  - name: stg
+    description: "Raw source tables from Salesforce and external data sources."
+    database: AIRBNB
+    schema: dev
+
+    tables:
+      - name: stg_sf_leads
+
+      - name: stg_source1
+
+      - name: stg_source2
+
+      - name: stg_source3
+
+  - name: int
+    description: "Raw source tables from Salesforce and external data sources."
+    database: AIRBNB
+    schema: dev
+
+    tables:
+      - name: int_leads_base
+
+      - name: int_leads_duped
+
+      - name: int_leads_sf
